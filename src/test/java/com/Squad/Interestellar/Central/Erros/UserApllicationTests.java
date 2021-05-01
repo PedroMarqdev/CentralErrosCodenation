@@ -30,8 +30,6 @@ public class UserApllicationTests {
 		@Autowired
 		private MockMvc mockMvc;
 
-		@MockBean
-		private UserService service;
 
 @Test
 		public void tryRegisterWithoutLogin() throws Exception {
