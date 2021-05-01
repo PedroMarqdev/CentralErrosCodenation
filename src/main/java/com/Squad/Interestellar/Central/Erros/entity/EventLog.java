@@ -18,11 +18,14 @@ public class EventLog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public enum levelType {
+        WARNING, ERROR, INFO
+    }
+
     @Column
     @NotNull
-    @NotBlank
-    @Size(max = 15)
-    private String level;
+    @Enumerated(EnumType.STRING)
+    private levelType level;
 
     @Column
     @NotNull
@@ -41,13 +44,10 @@ public class EventLog {
 
     @Column
     @NotNull
-    @NotBlank
     private int quantity;
 
     @Column
     @NotNull
-    @NotBlank
-    @CreatedDate
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime date;
 }
