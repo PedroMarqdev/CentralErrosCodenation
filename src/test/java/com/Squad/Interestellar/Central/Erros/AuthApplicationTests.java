@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class LogApplicationTests {
+public class AuthApplicationTests {
 
  @Autowired
  private MockMvc mockMvc;
@@ -46,6 +46,20 @@ public class LogApplicationTests {
  public void acessWithoutToken() throws Exception {
 	mockMvc.perform(MockMvcRequestBuilders.get("/loggers")).andExpect(status().isUnauthorized());
  }
+
+ @Test
+ public void acessWithToken() throws Exception {
+	final User usuario = new User();
+	usuario.setName("Pedro");
+	usuario.setLogin("juninhoo@gmail.com");
+	usuario.setPassword("0251984");
+	mockMvc.perform(MockMvcRequestBuilders.post("/users")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(asJsonString(usuario)));
+	final String token = obtainAccessToken(usuario.getLogin(), usuario.getPassword());
+	mockMvc.perform(MockMvcRequestBuilders.get("/loggers").header("Authorization", "Bearer " + token)).andExpect(status().isOk());
+ }
+
 
  private String obtainAccessToken(final String username, final String password) throws Exception {
 	final MultiValueMap<String, String> params = new LinkedMultiValueMap();
