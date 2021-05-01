@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/loggers")
@@ -21,7 +22,11 @@ public class EventLogController {
     private EventLogService logService;
 
     @GetMapping
-    public Iterable<EventLogDTO> findAll(Pageable pageable) {return this.logService.findAll(pageable);}
+    public Iterable<EventLogDTO> findAll(@PathParam("filter") String filter, @PathParam("value") String value, Pageable pageable) {
+        System.out.println(filter +" - "+ value);
+        if (filter != null && value != null) return this.logService.findAllByFilter(filter, value, pageable);
+        return this.logService.findAll(pageable);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getById(@PathVariable Long id){

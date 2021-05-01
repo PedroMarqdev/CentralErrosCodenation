@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.management.modelmbean.ModelMBean;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,7 +27,24 @@ public class EventLogService implements EventLogServiceInterface {
 
     @Override
     public List<EventLogDTO> findAll(Pageable pageable) {
+
         return eventLogRepository.findAll(pageable).stream().map((e) -> modelMapper.map(e, EventLogDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EventLogDTO> findAllByFilter(String filter, String value, Pageable pageable) {
+
+        if (filter.equals("level")) return eventLogRepository.findByLevelLike(EventLog.levelType.valueOf(value), pageable).stream().map((e) -> modelMapper.map(e, EventLogDTO.class)).collect(Collectors.toList());
+
+        if (filter.equals("quantity")) return eventLogRepository.findByQuantity(Integer.parseInt(value), pageable).stream().map((e) -> modelMapper.map(e, EventLogDTO.class)).collect(Collectors.toList());
+
+        if (filter.equals("description")) return eventLogRepository.findByDescriptionLike(value, pageable).stream().map((e) -> modelMapper.map(e, EventLogDTO.class)).collect(Collectors.toList());
+
+        if (filter.equals("source")) return eventLogRepository.findBySourceLike(value, pageable).stream().map((e) -> modelMapper.map(e, EventLogDTO.class)).collect(Collectors.toList());
+
+        return null;
+
+        //return eventLogRepository.findAllByFilter(queryString, pageable).stream().map((e) -> modelMapper.map(e, EventLogDTO.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -43,4 +61,5 @@ public class EventLogService implements EventLogServiceInterface {
     public EventLog save(EventLog eventLog) {
         return eventLogRepository.save(eventLog);
     }
+
 }
