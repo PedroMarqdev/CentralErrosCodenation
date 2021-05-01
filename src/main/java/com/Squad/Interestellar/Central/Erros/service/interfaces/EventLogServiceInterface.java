@@ -1,18 +1,18 @@
 package com.Squad.Interestellar.Central.Erros.service.interfaces;
 
+import com.Squad.Interestellar.Central.Erros.dto.EventLogDTO;
 import com.Squad.Interestellar.Central.Erros.entity.EventLog;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
 public interface EventLogServiceInterface {
-    List<EventLog> findAll();
+    List<EventLogDTO> findAll(Pageable pageable);
 
     Optional<EventLog> findById(Long id);
 
-    EventLog editEventLog(EventLog eventLog);
-
-    String deleteEventLog(Long id);
+    void deleteEventLog(Long id);
 
     EventLog save(EventLog eventLog);
 }
