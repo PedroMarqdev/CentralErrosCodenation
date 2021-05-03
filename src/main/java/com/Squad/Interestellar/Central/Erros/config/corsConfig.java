@@ -1,6 +1,6 @@
 @Configuration
 @EnableWebMvc
-public class WebConfig implements WebMvcConfigurer {
+public class corsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
