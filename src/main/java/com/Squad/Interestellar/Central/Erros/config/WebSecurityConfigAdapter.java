@@ -23,7 +23,10 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
     @Autowired
     public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository userRepository) throws Exception {
 
-        builder.userDetailsService(login -> new UserDTO(userRepository.findByLogin(login))).passwordEncoder(passwordEncoder());
+        builder
+                .userDetailsService(
+                        login -> new UserDTO(userRepository.findByLogin(login))).passwordEncoder(passwordEncoder()
+                );
     }
 
     @Bean

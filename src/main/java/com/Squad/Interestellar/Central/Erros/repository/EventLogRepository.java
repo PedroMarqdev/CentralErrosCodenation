@@ -12,16 +12,12 @@ import java.util.List;
 @Repository
 public interface EventLogRepository extends JpaRepository<EventLog, Long> {
 
-//    @Query(value = "SELECT * FROM logs l " +
-//            "WHERE :filter like %:value%", nativeQuery = true)
-//    List<EventLog> findAllByFilter(@Param("filter") String filter, @Param("value") String value, Pageable pageable);
-
-    List<EventLog> findByLevelLike(EventLog.levelType value, Pageable pageable);
+    List<EventLog> findByLevelContaining(EventLog.levelType value, Pageable pageable);
 
     List<EventLog> findByQuantity(Integer value, Pageable pageable);
 
-    List<EventLog> findByDescriptionLike(String value, Pageable pageable);
+    List<EventLog> findByDescriptionContaining(String value, Pageable pageable);
 
-    List<EventLog> findBySourceLike(String value, Pageable pageable);
+    List<EventLog> findBySourceContaining(String value, Pageable pageable);
 
 }
