@@ -6,14 +6,12 @@ import com.Squad.Interestellar.Central.Erros.repository.EventLogRepository;
 import com.Squad.Interestellar.Central.Erros.service.interfaces.EventLogServiceInterface;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.management.modelmbean.ModelMBean;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.springframework.data.domain.Pageable;
 
 @Service
 public class EventLogService implements EventLogServiceInterface {
@@ -26,7 +24,37 @@ public class EventLogService implements EventLogServiceInterface {
 
     @Override
     public List<EventLogDTO> findAll(Pageable pageable) {
-        return eventLogRepository.findAll(pageable).stream().map((e) -> modelMapper.map(e, EventLogDTO.class)).collect(Collectors.toList());
+
+        return eventLogRepository
+                .findAll(pageable)
+                .stream()
+                .map((e) -> modelMapper.map(e, EventLogDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EventLogDTO> findAllByFilter(String filter, String value, Pageable pageable) {
+        List<EventLog> logs = null;
+
+        if (filter.equals("level")) logs = eventLogRepository
+                .findByLevelContaining(EventLog.levelType.valueOf(value), pageable);
+
+        if (filter.equals("quantity")) logs =  eventLogRepository
+                .findByQuantity(Integer.parseInt(value), pageable);
+
+        if (filter.equals("description")) logs =  eventLogRepository
+                .findByDescriptionContaining(value, pageable);
+
+        if (filter.equals("source")) logs =  eventLogRepository
+                .findBySourceContaining(value, pageable);
+
+        if(logs != null) return logs
+                .stream()
+                .map((e) -> modelMapper
+                        .map(e, EventLogDTO.class))
+                .collect(Collectors.toList());
+
+        return null;
     }
 
     @Override
@@ -43,4 +71,5 @@ public class EventLogService implements EventLogServiceInterface {
     public EventLog save(EventLog eventLog) {
         return eventLogRepository.save(eventLog);
     }
+
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/loggers")
@@ -21,22 +22,44 @@ public class EventLogController {
     private EventLogService logService;
 
     @GetMapping
-    public Iterable<EventLogDTO> findAll(Pageable pageable) {return this.logService.findAll(pageable);}
+    public Iterable<EventLogDTO> findAll(@PathParam("filter") String filter, @PathParam("value") String value, Pageable pageable) {
+
+        if (filter != null && value != null) return this.logService
+                .findAllByFilter(filter, value, pageable);
+
+        return this.logService
+                .findAll(pageable);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getById(@PathVariable Long id){
-        return new ResponseEntity<String>(this.logService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)).getEventLog(), HttpStatus.OK);
+        return new ResponseEntity<String>(
+                this.logService
+                        .findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND))
+                        .getEventLog(),
+                HttpStatus.OK
+        );
     }
 
     @PostMapping
     public ResponseEntity<EventLog> create(@Valid @RequestBody EventLog eventLog) {
-        return new ResponseEntity<EventLog>(this.logService.save(eventLog), HttpStatus.CREATED);
+        return new ResponseEntity<EventLog>(
+                this.logService
+                        .save(eventLog),
+                HttpStatus.CREATED
+        );
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id){
-        this.logService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        this.logService.deleteEventLog(id);
+        this.logService
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        this.logService
+                .deleteEventLog(id);
+
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 }

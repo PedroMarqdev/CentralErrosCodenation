@@ -2,11 +2,10 @@ package com.Squad.Interestellar.Central.Erros.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -44,10 +43,11 @@ public class EventLog {
 
     @Column
     @NotNull
+    @Min(1)
     private int quantity;
 
     @Column
     @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime date;
 }

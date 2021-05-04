@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventLogServiceInterface {
+
+    List<EventLogDTO> findAllByFilter(String filter, String value, Pageable pageable);
+
     List<EventLogDTO> findAll(Pageable pageable);
 
     Optional<EventLog> findById(Long id);
