@@ -18,8 +18,10 @@ public class UserControllerAdvice {
  @ResponseBody
  @ResponseStatus(HttpStatus.BAD_REQUEST)
  @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
- public String SQLIntegrityConstraintViolationException(final Exception ex) {
-	return "Email já cadastrado";
+ public Map<String, String> SQLIntegrityConstraintViolationException(final Exception ex) {
+	final Map<String, String> error = new HashMap<>();
+	error.put("login", "Email já cadastrado");
+	return error;
  }
 
  @ResponseBody
