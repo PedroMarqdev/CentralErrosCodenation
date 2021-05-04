@@ -15,23 +15,23 @@ import java.util.Map;
 @ControllerAdvice
 public class UserControllerAdvice {
 
-    @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public String SQLIntegrityConstraintViolationException (Exception ex) {
-        return "Email já cadastrado";
-    }
+ @ResponseBody
+ @ResponseStatus(HttpStatus.BAD_REQUEST)
+ @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+ public String SQLIntegrityConstraintViolationException(final Exception ex) {
+	return "Email já cadastrado";
+ }
 
-    @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
+ @ResponseBody
+ @ResponseStatus(HttpStatus.BAD_REQUEST)
+ @ExceptionHandler(MethodArgumentNotValidException.class)
+ public Map<String, String> handleValidationExceptions(final MethodArgumentNotValidException ex) {
+	final Map<String, String> errors = new HashMap<>();
+	ex.getBindingResult().getAllErrors().forEach((error) -> {
+	 final String fieldName = ((FieldError) error).getField();
+	 final String errorMessage = error.getDefaultMessage();
+	 errors.put(fieldName, errorMessage);
+	});
+	return errors;
+ }
 }

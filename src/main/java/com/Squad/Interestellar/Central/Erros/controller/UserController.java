@@ -13,19 +13,19 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+ @Autowired
+ private UserService userService;
 
-    @GetMapping
-    public Iterable<User> listAll() {
-        return this.userService.findAll();
-    }
+ @GetMapping
+ public Iterable<User> listAll() {
+	return this.userService.findAll();
+ }
 
-    @PostMapping
-    public ResponseEntity<User> create(@Valid @RequestBody User user) {
+ @PostMapping
+ public ResponseEntity<User> create(@Valid @RequestBody final User user) {
 
-        return new ResponseEntity<User>(this.userService.save(user), HttpStatus.CREATED);
+	return new ResponseEntity<User>(this.userService.save(user), HttpStatus.CREATED);
 
-    }
+ }
 
 }
