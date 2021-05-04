@@ -15,22 +15,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public AuthenticationManager customAuthenticationManager() throws Exception {
-        return authenticationManagerBean();
-    }
+ @Bean
+ public AuthenticationManager customAuthenticationManager() throws Exception {
+	return authenticationManagerBean();
+ }
 
-    @Autowired
-    public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository userRepository) throws Exception {
+ @Autowired
+ public void authenticationManager(final AuthenticationManagerBuilder builder, final UserRepository userRepository) throws Exception {
 
-        builder
-                .userDetailsService(
-                        login -> new UserDTO(userRepository.findByLogin(login))).passwordEncoder(passwordEncoder()
-                );
-    }
+	builder
+			.userDetailsService(
+					login -> new UserDTO(userRepository.findByLogin(login))).passwordEncoder(passwordEncoder()
+	);
+ }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+ @Bean
+ public BCryptPasswordEncoder passwordEncoder() {
+	return new BCryptPasswordEncoder();
+ }
 }

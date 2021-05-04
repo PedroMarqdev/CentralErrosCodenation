@@ -9,11 +9,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @Configuration
 @EnableResourceServer
 public class ResourceServer extends ResourceServerConfigurerAdapter {
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users").permitAll()
-                .anyRequest().permitAll();
+ @Override
+ public void configure(final HttpSecurity http) throws Exception {
+	http.authorizeRequests()
+			.antMatchers(HttpMethod.POST, "/users").permitAll()
+			.anyRequest().permitAll();
 
-    }
+ }
 }
