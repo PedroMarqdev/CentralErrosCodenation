@@ -14,8 +14,8 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+ @Autowired
+ private UserService userService;
 
     @PostMapping
     @ApiOperation(value = "Cadastra um usuário")
@@ -23,6 +23,6 @@ public class UserController {
         this.userService.save(user);
         return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.CREATED);
 
-    }
+ }
 
 }

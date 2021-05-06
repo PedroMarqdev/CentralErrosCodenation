@@ -18,37 +18,37 @@ import java.util.stream.Collectors;
 @Service
 public class EventLogService implements EventLogServiceInterface {
 
-    @Autowired
-    private ModelMapper modelMapper;
+ @Autowired
+ private ModelMapper modelMapper;
 
-    @Autowired
-    private EventLogRepository eventLogRepository;
+ @Autowired
+ private EventLogRepository eventLogRepository;
 
-    @Override
-    public List<EventLogDTO> findAll(Pageable pageable) {
+ @Override
+ public List<EventLogDTO> findAll(final Pageable pageable) {
 
-        return eventLogRepository
-                .findAll(pageable)
-                .stream()
-                .map((e) -> modelMapper.map(e, EventLogDTO.class))
-                .collect(Collectors.toList());
-    }
+	return eventLogRepository
+			.findAll(pageable)
+			.stream()
+			.map((e) -> modelMapper.map(e, EventLogDTO.class))
+			.collect(Collectors.toList());
+ }
 
-    @Override
-    public List<EventLogDTO> findAllByFilter(String filter, String value, Pageable pageable) {
-        List<EventLog> logs = null;
+ @Override
+ public List<EventLogDTO> findAllByFilter(final String filter, final String value, final Pageable pageable) {
+	List<EventLog> logs = null;
 
-        if (filter.equals("level")) logs = eventLogRepository
-                .findByLevelContaining(EventLog.levelType.valueOf(value), pageable);
+	if (filter.equals("level")) logs = eventLogRepository
+			.findByLevelContaining(EventLog.levelType.valueOf(value), pageable);
 
-        if (filter.equals("quantity")) logs =  eventLogRepository
-                .findByQuantity(Integer.parseInt(value), pageable);
+	if (filter.equals("quantity")) logs = eventLogRepository
+			.findByQuantity(Integer.parseInt(value), pageable);
 
-        if (filter.equals("description")) logs =  eventLogRepository
-                .findByDescriptionContaining(value, pageable);
+	if (filter.equals("description")) logs = eventLogRepository
+			.findByDescriptionContaining(value, pageable);
 
-        if (filter.equals("source")) logs =  eventLogRepository
-                .findBySourceContaining(value, pageable);
+	if (filter.equals("source")) logs = eventLogRepository
+			.findBySourceContaining(value, pageable);
 
         if (filter.equals("date")) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -62,22 +62,22 @@ public class EventLogService implements EventLogServiceInterface {
                         .map(e, EventLogDTO.class))
                 .collect(Collectors.toList());
 
-        return null;
-    }
+	return null;
+ }
 
-    @Override
-    public Optional<EventLog> findById(Long id) {
-        return eventLogRepository.findById(id);
-    }
+ @Override
+ public Optional<EventLog> findById(final Long id) {
+	return eventLogRepository.findById(id);
+ }
 
-    @Override
-    public void deleteEventLog(Long id) {
-        eventLogRepository.deleteById(id);
-    }
+ @Override
+ public void deleteEventLog(final Long id) {
+	eventLogRepository.deleteById(id);
+ }
 
-    @Override
-    public EventLog save(EventLog eventLog) {
-        return eventLogRepository.save(eventLog);
-    }
+ @Override
+ public EventLog save(final EventLog eventLog) {
+	return eventLogRepository.save(eventLog);
+ }
 
 }

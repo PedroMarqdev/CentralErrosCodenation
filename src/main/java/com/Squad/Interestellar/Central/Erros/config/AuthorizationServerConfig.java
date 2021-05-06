@@ -15,34 +15,34 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    private static final int ACCESS_TOKEN_VALIDITY_IN_SECONDS = 360;
-    private static final int REFRESH_TOKEN_VALIDITY_IN_SECONDS = 360;
+ private static final int ACCESS_TOKEN_VALIDITY_IN_SECONDS = 360;
+ private static final int REFRESH_TOKEN_VALIDITY_IN_SECONDS = 360;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+ @Autowired
+ private AuthenticationManager authenticationManager;
 
 
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()")
-                .allowFormAuthenticationForClients();
-    }
+ @Override
+ public void configure(final AuthorizationServerSecurityConfigurer security) throws Exception {
+	security.tokenKeyAccess("permitAll()")
+			.checkTokenAccess("isAuthenticated()")
+			.allowFormAuthenticationForClients();
+ }
 
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("client_id")
-                .secret(new BCryptPasswordEncoder().encode("client_secret"))
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-                .scopes("read", "write", "trust")
-                .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_IN_SECONDS)
-                .refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_IN_SECONDS);
-    }
+ @Override
+ public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
+	clients.inMemory()
+			.withClient("client_id")
+			.secret(new BCryptPasswordEncoder().encode("client_secret"))
+			.authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
+			.scopes("read", "write", "trust")
+			.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_IN_SECONDS)
+			.refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_IN_SECONDS);
+ }
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager)
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
-    }
+ @Override
+ public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+	endpoints.authenticationManager(authenticationManager)
+			.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+ }
 }

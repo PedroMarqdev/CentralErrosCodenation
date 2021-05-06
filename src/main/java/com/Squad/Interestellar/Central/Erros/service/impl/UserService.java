@@ -13,13 +13,13 @@ import java.util.Optional;
 @Service
 public class UserService implements UserServiceInterface {
 
-    @Autowired
-    private UserRepository userRepository;
+ @Autowired
+ private UserRepository userRepository;
 
-    @Override
-    public Optional<User> findByLogin(String login) {
-        return userRepository.findByLogin(login);
-    }
+ @Override
+ public Optional<User> findByLogin(final String login) {
+	return userRepository.findByLogin(login);
+ }
 
     @Override
     public User save(User user) {

@@ -19,8 +19,8 @@ import javax.websocket.server.PathParam;
 @RequestMapping("/loggers")
 public class EventLogController {
 
-    @Autowired
-    private EventLogService logService;
+ @Autowired
+ private EventLogService logService;
 
     @GetMapping
     @ApiOperation(
@@ -33,12 +33,12 @@ public class EventLogController {
             Pageable pageable
     ) {
 
-        if (filter != null && value != null) return this.logService
-                .findAllByFilter(filter, value, pageable);
+	if (filter != null && value != null) return this.logService
+			.findAllByFilter(filter, value, pageable);
 
-        return this.logService
-                .findAll(pageable);
-    }
+	return this.logService
+			.findAll(pageable);
+ }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Retorna um log pelo id")
@@ -69,9 +69,9 @@ public class EventLogController {
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        this.logService
-                .deleteEventLog(id);
+	this.logService
+			.deleteEventLog(id);
 
-        return new ResponseEntity<String>(HttpStatus.OK);
-    }
+	return new ResponseEntity<String>(HttpStatus.OK);
+ }
 }

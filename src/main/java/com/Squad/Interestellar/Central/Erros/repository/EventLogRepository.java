@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 public interface EventLogRepository extends JpaRepository<EventLog, Long> {
 
-    List<EventLog> findByLevelContaining(EventLog.levelType value, Pageable pageable);
+ List<EventLog> findByLevelContaining(EventLog.levelType value, Pageable pageable);
 
-    List<EventLog> findByQuantity(Integer value, Pageable pageable);
+ List<EventLog> findByQuantity(Integer value, Pageable pageable);
 
-    List<EventLog> findByDescriptionContaining(String value, Pageable pageable);
+ List<EventLog> findByDescriptionContaining(String value, Pageable pageable);
 
-    List<EventLog> findBySourceContaining(String value, Pageable pageable);
+  List<EventLog> findBySourceContaining(String value, Pageable pageable);
     
-    List<EventLog> findByDate(LocalDateTime value, Pageable pageable);
+  List<EventLog> findByDate(LocalDateTime value, Pageable pageable);
 
 }

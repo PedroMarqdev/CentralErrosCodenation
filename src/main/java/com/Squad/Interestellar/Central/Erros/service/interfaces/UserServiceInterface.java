@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface UserServiceInterface {
 
 
-    Optional<User> findByLogin (String login);
+ Optional<User> findByLogin(String login);
 
     User save(User user);
 }

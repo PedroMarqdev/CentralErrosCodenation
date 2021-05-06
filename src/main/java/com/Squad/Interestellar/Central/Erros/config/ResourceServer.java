@@ -28,5 +28,5 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated();
 
-    }
+ }
 }
