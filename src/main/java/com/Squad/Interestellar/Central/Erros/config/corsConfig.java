@@ -6,7 +6,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
+// a linha acima está comentada para poder funcionar o swagger
 public class corsConfig implements WebMvcConfigurer {
 
     @Override
