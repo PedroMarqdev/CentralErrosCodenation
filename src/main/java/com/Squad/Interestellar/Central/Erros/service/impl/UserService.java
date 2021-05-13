@@ -21,14 +21,9 @@ public class UserService implements UserServiceInterface {
 	return userRepository.findByLogin(login);
  }
 
- @Override
- public List<User> findAll() {
-	return userRepository.findAll();
- }
-
- @Override
- public User save(final User user) {
-	user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-	return userRepository.save(user);
- }
+    @Override
+    public User save(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        return userRepository.save(user);
+    }
 }

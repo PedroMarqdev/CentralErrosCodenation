@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -48,11 +50,17 @@ public class EventLogService implements EventLogServiceInterface {
 	if (filter.equals("source")) logs = eventLogRepository
 			.findBySourceContaining(value, pageable);
 
-	if (logs != null) return logs
-			.stream()
-			.map((e) -> modelMapper
-					.map(e, EventLogDTO.class))
-			.collect(Collectors.toList());
+        if (filter.equals("date")) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            logs =  eventLogRepository
+                    .findByDate(LocalDateTime.parse(value, formatter), pageable);
+        }
+
+        if(logs != null) return logs
+                .stream()
+                .map((e) -> modelMapper
+                        .map(e, EventLogDTO.class))
+                .collect(Collectors.toList());
 
 	return null;
  }

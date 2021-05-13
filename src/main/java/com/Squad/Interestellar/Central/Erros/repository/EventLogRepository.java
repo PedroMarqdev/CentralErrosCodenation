@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -16,6 +17,8 @@ public interface EventLogRepository extends JpaRepository<EventLog, Long> {
 
  List<EventLog> findByDescriptionContaining(String value, Pageable pageable);
 
- List<EventLog> findBySourceContaining(String value, Pageable pageable);
+  List<EventLog> findBySourceContaining(String value, Pageable pageable);
+    
+  List<EventLog> findByDate(LocalDateTime value, Pageable pageable);
 
 }
