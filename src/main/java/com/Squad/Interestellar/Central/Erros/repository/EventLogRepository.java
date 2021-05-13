@@ -19,6 +19,6 @@ public interface EventLogRepository extends JpaRepository<EventLog, Long> {
 
   List<EventLog> findBySourceContaining(String value, Pageable pageable);
     
-  List<EventLog> findByDate(LocalDateTime value, Pageable pageable);
+  List<EventLog> findByDateBetween(LocalDateTime start, LocalDateTime end, Pageable pageable);
 
 }

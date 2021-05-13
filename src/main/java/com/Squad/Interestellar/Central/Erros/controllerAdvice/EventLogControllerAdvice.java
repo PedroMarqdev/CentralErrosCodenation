@@ -13,7 +13,7 @@ import java.util.Map;
 @ControllerAdvice
 public class EventLogControllerAdvice {
  @ResponseBody
- @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+ @ResponseStatus(HttpStatus.BAD_REQUEST)
  @ExceptionHandler(IllegalArgumentException.class)
  public Map<String, String> IllegalArgumentException(final Exception ex) {
 	final Map<String, String> error = new HashMap<>();

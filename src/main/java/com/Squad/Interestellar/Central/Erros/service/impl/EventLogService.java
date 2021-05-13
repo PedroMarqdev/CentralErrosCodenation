@@ -26,7 +26,7 @@ public class EventLogService implements EventLogServiceInterface {
 
  @Override
  public List<EventLogDTO> findAll(final Pageable pageable) {
-
+    System.out.println(pageable.getPageSize());
 	return eventLogRepository
 			.findAll(pageable)
 			.stream()
@@ -52,8 +52,13 @@ public class EventLogService implements EventLogServiceInterface {
 
         if (filter.equals("date")) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            String[] dateInterval = value.split("and");
             logs =  eventLogRepository
-                    .findByDate(LocalDateTime.parse(value, formatter), pageable);
+                    .findByDateBetween(
+                            LocalDateTime.parse(dateInterval[0], formatter),
+                            LocalDateTime.parse(dateInterval[1], formatter),
+                            pageable
+                    );
         }
 
         if(logs != null) return logs
