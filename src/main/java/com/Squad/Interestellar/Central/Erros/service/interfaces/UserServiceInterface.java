@@ -10,7 +10,5 @@ public interface UserServiceInterface {
 
  Optional<User> findByLogin(String login);
 
- List<User> findAll();
-
- User save(User user);
+    User save(User user);
 }

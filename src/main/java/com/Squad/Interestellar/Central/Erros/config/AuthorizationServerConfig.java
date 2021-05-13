@@ -15,8 +15,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
- private static final int ACCESS_TOKEN_VALIDITY_IN_SECONDS = 360;
- private static final int REFRESH_TOKEN_VALIDITY_IN_SECONDS = 360;
+ private static final int ACCESS_TOKEN_VALIDITY_IN_SECONDS = 3600;
+ private static final int REFRESH_TOKEN_VALIDITY_IN_SECONDS = 3600;
 
  @Autowired
  private AuthenticationManager authenticationManager;
