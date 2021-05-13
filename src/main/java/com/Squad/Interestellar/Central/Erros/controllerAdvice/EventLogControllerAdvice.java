@@ -21,7 +21,7 @@ public class EventLogControllerAdvice {
 	 error.put("error", "Esse campo apenas aceita valores como: ERROR, INFO e WARNING" );
 	 return error;
 	};
-	error.put("error", "Argumento inválido em algum campo" );
+	error.put("error", "Argumento inválido em algum/ns campo/s" );
 	return error;
  }
 }
