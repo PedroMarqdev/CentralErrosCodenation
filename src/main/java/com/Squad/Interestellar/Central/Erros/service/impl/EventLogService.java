@@ -37,7 +37,7 @@ public class EventLogService implements EventLogServiceInterface {
 	List<EventLog> logs = null;
 
 	if (filter.equals("level")) logs = eventLogRepository
-			.findByLevelContaining(EventLog.levelType.valueOf(value), pageable);
+			.findByLevel(EventLog.levelType.valueOf(value), pageable);
 
 	if (filter.equals("quantity")) logs = eventLogRepository
 			.findByQuantity(Integer.parseInt(value), pageable);

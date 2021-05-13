@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface EventLogRepository extends JpaRepository<EventLog, Long> {
 
- List<EventLog> findByLevelContaining(EventLog.levelType value, Pageable pageable);
+ List<EventLog> findByLevel(EventLog.levelType value, Pageable pageable);
 
  List<EventLog> findByQuantity(Integer value, Pageable pageable);
 
