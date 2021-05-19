@@ -37,7 +37,7 @@ public class EventLogController {
 			.findAllByFilter(filter, value, pageable);
 
 	return this.logService
-			.findAll(pageable);
+			.findAll();
  }
 
     @GetMapping("/{id}")

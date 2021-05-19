@@ -25,10 +25,10 @@ public class EventLogService implements EventLogServiceInterface {
  private EventLogRepository eventLogRepository;
 
  @Override
- public List<EventLogDTO> findAll(final Pageable pageable) {
+ public List<EventLogDTO> findAll() {
 
 	return eventLogRepository
-			.findAll(pageable)
+			.findAll()
 			.stream()
 			.map((e) -> modelMapper.map(e, EventLogDTO.class))
 			.collect(Collectors.toList());

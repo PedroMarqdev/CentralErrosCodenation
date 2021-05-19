@@ -11,7 +11,7 @@ public interface EventLogServiceInterface {
 
  List<EventLogDTO> findAllByFilter(String filter, String value, Pageable pageable);
 
- List<EventLogDTO> findAll(Pageable pageable);
+ List<EventLogDTO> findAll();
 
  Optional<EventLog> findById(Long id);
 
