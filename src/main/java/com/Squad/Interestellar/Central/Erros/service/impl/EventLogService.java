@@ -44,6 +44,9 @@ public class EventLogService implements EventLogServiceInterface {
 	if (filter.equals("quantity")) logs = eventLogRepository
 			.findByQuantity(Integer.parseInt(value), pageable);
 
+	if (filter.equals("id")) logs = eventLogRepository
+            .findAllById(Long.parseLong(value), pageable);
+
 	if (filter.equals("description")) logs = eventLogRepository
 			.findByDescriptionContaining(value, pageable);
 
