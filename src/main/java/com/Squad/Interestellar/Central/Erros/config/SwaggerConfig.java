@@ -35,8 +35,6 @@ public class SwaggerConfig {
                         "API desenvolvida para o projeto central de erros proposto pela Codenation \n" +
                         "Colaboradores: \n\n" +
                         "Berilo     Git: wberilo        Email: wberilo@gmail.com\n" +
-                        "Daniel     Git: danielmlduarte Email: daniel_mld@hotmail.com\n" +
-                        "Hebert     Git: Hfreitas       Email: hfreitas86@gmail.com\n" +
                         "Pedro      Git: PedroMarqdev   Email: pedromarqdev@gmail.com\n" +
                         "Vitor      Git: vitor-rc1      Email: vitorrc01x@gmail.com\n"
                 )

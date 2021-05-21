@@ -6,6 +6,7 @@ import com.Squad.Interestellar.Central.Erros.repository.EventLogRepository;
 import com.Squad.Interestellar.Central.Erros.service.interfaces.EventLogServiceInterface;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -25,18 +26,14 @@ public class EventLogService implements EventLogServiceInterface {
  private EventLogRepository eventLogRepository;
 
  @Override
- public List<EventLogDTO> findAll() {
-
+ public Page<EventLog> findAll(Pageable pageable) {
 	return eventLogRepository
-			.findAll()
-			.stream()
-			.map((e) -> modelMapper.map(e, EventLogDTO.class))
-			.collect(Collectors.toList());
+			.findAll(pageable);
  }
 
  @Override
- public List<EventLogDTO> findAllByFilter(final String filter, final String value, final Pageable pageable) {
-	List<EventLog> logs = null;
+ public Page<EventLog> findAllByFilter(final String filter, final String value, final Pageable pageable) {
+     Page<EventLog> logs = null;
 
 	if (filter.equals("level")) logs = eventLogRepository
 			.findByLevel(EventLog.levelType.valueOf(value), pageable);
@@ -44,28 +41,27 @@ public class EventLogService implements EventLogServiceInterface {
 	if (filter.equals("quantity")) logs = eventLogRepository
 			.findByQuantity(Integer.parseInt(value), pageable);
 
+	if (filter.equals("id")) logs = eventLogRepository
+            .findAllById(Long.parseLong(value), pageable);
+
 	if (filter.equals("description")) logs = eventLogRepository
 			.findByDescriptionContaining(value, pageable);
 
 	if (filter.equals("source")) logs = eventLogRepository
 			.findBySourceContaining(value, pageable);
 
-        if (filter.equals("date")) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-            String[] dateInterval = value.split("and");
-            logs =  eventLogRepository
-                    .findByDateBetween(
-                            LocalDateTime.parse(dateInterval[0], formatter),
-                            LocalDateTime.parse(dateInterval[1], formatter),
-                            pageable
+	if (filter.equals("date")) {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+	    String[] dateInterval = value.split("and");
+	    logs =  eventLogRepository
+                .findByDateBetween(
+                        LocalDateTime.parse(dateInterval[0], formatter),
+                        LocalDateTime.parse(dateInterval[1], formatter),
+                        pageable
                     );
         }
 
-        if(logs != null) return logs
-                .stream()
-                .map((e) -> modelMapper
-                        .map(e, EventLogDTO.class))
-                .collect(Collectors.toList());
+	if(logs != null) return logs;
 
 	return null;
  }
