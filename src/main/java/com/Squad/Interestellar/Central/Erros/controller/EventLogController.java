@@ -33,11 +33,15 @@ public class EventLogController {
             Pageable pageable
     ) {
 
-	if (filter != null && value != null) return this.logService
-			.findAllByFilter(filter, value, pageable);
+	if (filter != null && value != null) {
+	    return this.logService
+                .findAllByFilter(filter, value, pageable)
+                .map(EventLogDTO::new);
+    }
 
 	return this.logService
-			.findAll();
+			.findAll(pageable)
+            .map(EventLogDTO::new);
  }
 
     @GetMapping("/{id}")
