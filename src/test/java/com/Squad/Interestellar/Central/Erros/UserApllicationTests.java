@@ -22,7 +22,7 @@ public class UserApllicationTests {
  @Autowired
  private MockMvc mockMvc;
 
- public static String asJsonString(final Object obj) {
+ static String asJsonString(final Object obj) {
 	try {
 	 return new ObjectMapper().writeValueAsString(obj);
 	} catch (final Exception e) {
@@ -31,7 +31,7 @@ public class UserApllicationTests {
  }
 
  @Test
- public void tryRegisterWithoutLogin() throws Exception {
+ private void tryRegisterWithoutLogin() throws Exception {
 	final User usuario = new User();
 	usuario.setPassword("12345");
 	usuario.setName("pedro");
@@ -42,7 +42,7 @@ public class UserApllicationTests {
  }
 
  @Test
- public void tryRegisterWithoutPasssword() throws Exception {
+ private void tryRegisterWithoutPasssword() throws Exception {
 	final User usuario = new User();
 	usuario.setLogin("juninho@gmail.com");
 	usuario.setName("pedro");
@@ -53,7 +53,7 @@ public class UserApllicationTests {
  }
 
  @Test
- public void tryRegisterWithoutName() throws Exception {
+ private void tryRegisterWithoutName() throws Exception {
 	final User usuario = new User();
 	usuario.setLogin("juninho@gmail.com");
 	usuario.setPassword("0251984");
@@ -65,7 +65,7 @@ public class UserApllicationTests {
  }
 
  @Test
- public void tryRegisterSucessfullUser() throws Exception {
+ private void tryRegisterSucessfullUser() throws Exception {
 	final User usuario = new User();
 	usuario.setName("Pedro");
 	usuario.setLogin("juninho@gmail.com");
