@@ -21,7 +21,7 @@ public class EventLogDTO {
 
  private LocalDateTime date;
 
- public EventLogDTO(EventLog eventLog) {
+ public EventLogDTO(final EventLog eventLog) {
   this.id = eventLog.getId();
   this.level = eventLog.getLevel();
   this.description = eventLog.getDescription();

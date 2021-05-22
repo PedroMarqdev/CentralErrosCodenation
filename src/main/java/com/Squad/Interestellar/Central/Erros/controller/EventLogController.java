@@ -28,9 +28,9 @@ public class EventLogController {
             notes = "O filter deve ser o nome de uma das colunas a serem filtradas e value o valor que queremos buscar"
     )
     public Iterable<EventLogDTO> findAll(
-            @PathParam("filter") String filter,
-            @PathParam("value") String value,
-            Pageable pageable
+				@PathParam("filter") final String filter,
+				@PathParam("value") final String value,
+				final Pageable pageable
     ) {
 
 	if (filter != null && value != null) {
@@ -46,7 +46,7 @@ public class EventLogController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Retorna um log pelo id")
-    public ResponseEntity<String> getById(@PathVariable Long id){
+    public ResponseEntity<String> getById(@PathVariable final Long id){
         return new ResponseEntity<String>(
                 this.logService
                         .findById(id)
@@ -58,7 +58,7 @@ public class EventLogController {
 
     @PostMapping
     @ApiOperation(value = "Cadastra um log")
-    public ResponseEntity<EventLog> create(@Valid @RequestBody EventLog eventLog) {
+    public ResponseEntity<EventLog> create(@Valid @RequestBody final EventLog eventLog) {
         return new ResponseEntity<EventLog>(
                 this.logService
                         .save(eventLog),
@@ -68,7 +68,7 @@ public class EventLogController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Exclui um log pelo Id")
-    public ResponseEntity<String> deleteById(@PathVariable Long id){
+    public ResponseEntity<String> deleteById(@PathVariable final Long id){
         this.logService
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

@@ -29,7 +29,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
 
-        ApiInfo apiInfo = new ApiInfoBuilder()
+        final ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("Central de erros API")
                 .description(
                         "API desenvolvida para o projeto central de erros proposto pela Codenation \n" +

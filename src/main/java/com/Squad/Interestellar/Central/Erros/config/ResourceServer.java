@@ -22,7 +22,7 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
             "/swagger-ui/**"
     };
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    public void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()

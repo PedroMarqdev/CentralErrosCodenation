@@ -19,7 +19,7 @@ public class UserController {
 
     @PostMapping
     @ApiOperation(value = "Cadastra um usuário")
-    public ResponseEntity<String> create(@Valid @RequestBody User user) {
+    public ResponseEntity<String> create(@Valid @RequestBody final User user) {
         this.userService.save(user);
         return new ResponseEntity<String>("Usuário cadastrado com sucesso", HttpStatus.CREATED);
 

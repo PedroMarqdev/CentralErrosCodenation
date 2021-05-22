@@ -31,7 +31,7 @@ public class UserApllicationTests {
  }
 
  @Test
- private void tryRegisterWithoutLogin() throws Exception {
+ public void tryRegisterWithoutLogin() throws Exception {
 	final User usuario = new User();
 	usuario.setPassword("12345");
 	usuario.setName("pedro");
@@ -42,7 +42,7 @@ public class UserApllicationTests {
  }
 
  @Test
- private void tryRegisterWithoutPasssword() throws Exception {
+ public void tryRegisterWithoutPasssword() throws Exception {
 	final User usuario = new User();
 	usuario.setLogin("juninho@gmail.com");
 	usuario.setName("pedro");
@@ -53,7 +53,7 @@ public class UserApllicationTests {
  }
 
  @Test
- private void tryRegisterWithoutName() throws Exception {
+ public void tryRegisterWithoutName() throws Exception {
 	final User usuario = new User();
 	usuario.setLogin("juninho@gmail.com");
 	usuario.setPassword("0251984");
@@ -65,7 +65,7 @@ public class UserApllicationTests {
  }
 
  @Test
- private void tryRegisterSucessfullUser() throws Exception {
+ public void tryRegisterSucessfullUser() throws Exception {
 	final User usuario = new User();
 	usuario.setName("Pedro");
 	usuario.setLogin("juninho@gmail.com");

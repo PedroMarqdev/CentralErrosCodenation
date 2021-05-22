@@ -20,7 +20,7 @@ public class EventLogControllerAdvice {
   if(ex.getMessage().contains("No enum constant")) {
 	 error.put("error", "Esse campo apenas aceita valores como: ERROR, INFO e WARNING" );
 	 return error;
-	};
+	}
 	error.put("error", "Argumento inválido em algum/ns campo/s" );
 	return error;
  }
