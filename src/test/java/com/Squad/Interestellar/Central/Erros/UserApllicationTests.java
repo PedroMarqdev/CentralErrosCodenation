@@ -2,6 +2,7 @@ package com.Squad.Interestellar.Central.Erros;
 
 import com.Squad.Interestellar.Central.Erros.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,7 +31,15 @@ public class UserApllicationTests {
 
  static String asJsonString(final Object obj) {
 	try {
-	 return new ObjectMapper().writeValueAsString(obj);
+	 ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+	 LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC);
+	 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+	 String formatedHour = localDateTime.format(formatter);
+	 String json = ow.writeValueAsString(obj);
+	 String dateJson = '"' + "date" + '"' + " : null";
+	 String newDateJson = '"' + "date" + '"' + " : " + '"' + formatedHour + '"';
+	 json = json.replace(dateJson, newDateJson);
+	 return json;
 	} catch (final Exception e) {
 	 throw new RuntimeException(e);
 	}

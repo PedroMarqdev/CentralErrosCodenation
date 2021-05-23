@@ -48,7 +48,67 @@ class LogApplicationTests extends Specification{
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(eventLog))).andReturn()
         then: "Get a OK Status"
-        result.getResponse().getStatus().toString() == "200"
+        result.getResponse().getStatus().toString() == "201"
+    }
+    def "Given a successful log with authorization without level, should return BAD REQUEST"() {
+        given: "A log without level"
+        String withoutLevelJson = '{"description": "dados corrompidos", "source": "192.168.0.101", "quantity": 3, "eventLog":"asa", "date": "27-04-2020 12:30"}'
+        when: "Do a post req to endpoint"
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/loggers").header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(withoutLevelJson)).andReturn()
+        then: "Get a BAD REQUEST Status"
+        result.getResponse().getStatus().toString() == "400"
+    }
+    def "Given a successful log with authorization without description, should return BAD REQUEST"() {
+        given: "A log without description"
+        EventLog eventLog = Fixture.from(EventLog).gimme("log-without-description")
+        when: "Do a post req to endpoint"
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/loggers").header("Authorization", "Bearer " + token)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(asJsonString(eventLog))).andReturn()
+        then: "Get a BAD REQUEST Status"
+        result.getResponse().getStatus().toString() == "400"
+    }
+    def "Given a successful log with authorization without eventLog, should return BAD REQUEST"() {
+        given: "A log without eventLog"
+        EventLog eventLog = Fixture.from(EventLog).gimme("log-without-eventLog")
+        when: "Do a post req to endpoint"
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/loggers").header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(eventLog))).andReturn()
+        then: "Get a BAD REQUEST Status"
+        result.getResponse().getStatus().toString() == "400"
+    }
+    def "Given a successful log with authorization without source, should return BAD REQUEST"() {
+        given: "A log without source"
+        EventLog eventLog = Fixture.from(EventLog).gimme("log-without-source")
+        when: "Do a post req to endpoint"
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/loggers").header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(eventLog))).andReturn()
+        then: "Get a BAD REQUEST Status"
+        result.getResponse().getStatus().toString() == "400"
+    }
+    def "Given a successful log with authorization without quantity, should return BAD REQUEST"() {
+        given: "A log whithout quantity"
+        EventLog eventLog = Fixture.from(EventLog).gimme("log-without-quantity")
+        when: "Do a post req to endpoint"
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/loggers").header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(eventLog))).andReturn()
+        then: "Get a BAD REQUEST Status"
+        result.getResponse().getStatus().toString() == "400"
+    }
+    def "Given a successful log with authorization without date, should return BAD REQUEST"() {
+        given: "A log without Date"
+        String withoutDateJson = '{"level": "ERROR", "description": "dados corrompidos", "source": "192.168.0.101", "quantity": 3, "eventLog":"asa"}'
+        when: "Do a post req to endpoint"
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/loggers").header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(withoutDateJson)).andReturn()
+        then: "Get a BAD REQUEST Status"
+        result.getResponse().getStatus().toString() == "400"
     }
 
     String obtainAccessToken(final String username, final String password) throws Exception {

@@ -18,49 +18,44 @@ public class LogTemplates implements TemplateLoader {
 	 add("eventLog", "PORT BAD FUNCTION REPORT");
 	 add("source", "Feign CLIENT API");
 	 add("quantity", "2");
-	 add("date", data);
 	}});
-	Fixture.of(EventLog.class).addTemplate("log-valid-without-level", new Rule() {{
+	Fixture.of(EventLog.class).addTemplate("log-without-level", new Rule() {{
 	 add("description", "ERROR 503 GATEWAY");
 	 add("eventLog", "PORT BAD FUNCTION REPORT");
 	 add("source", "Feign CLIENT API");
 	 add("quantity", "2");
-	 add("date", "10-03-2021 14:12");
 	}});
-	Fixture.of(EventLog.class).addTemplate("log-valid-without-description", new Rule() {{
-	 add("level", "ERROR");
+	Fixture.of(EventLog.class).addTemplate("log-without-description", new Rule() {{
+	 add("level", EventLog.levelType.ERROR);
 	 add("eventLog", "PORT BAD FUNCTION REPORT");
 	 add("source", "Feign CLIENT API");
 	 add("quantity", "2");
-	 add("date", "10-03-2021 14:12");
 	}});
-	Fixture.of(EventLog.class).addTemplate("log-valid-without-eventLog", new Rule() {{
-	 add("level", "ERROR");
+	Fixture.of(EventLog.class).addTemplate("log-without-eventLog", new Rule() {{
+	 add("level", EventLog.levelType.ERROR);
 	 add("description", "ERROR 503 GATEWAY");
 	 add("source", "Feign CLIENT API");
 	 add("quantity", "2");
-	 add("date", "10-03-2021 14:12");
 	}});
-	Fixture.of(EventLog.class).addTemplate("log-valid-without-source", new Rule() {{
-	 add("level", "ERROR");
+	Fixture.of(EventLog.class).addTemplate("log-without-source", new Rule() {{
+	 add("level", EventLog.levelType.ERROR);
 	 add("description", "ERROR 503 GATEWAY");
 	 add("eventLog", "PORT BAD FUNCTION REPORT");
 	 add("quantity", "2");
-	 add("date", "10-03-2021 14:12");
 	}});
-	Fixture.of(EventLog.class).addTemplate("log-valid-without-quantity", new Rule() {{
-	 add("level", "ERROR");
+	Fixture.of(EventLog.class).addTemplate("log-without-quantity", new Rule() {{
+	 add("level", EventLog.levelType.ERROR);
 	 add("description", "ERROR 503 GATEWAY");
 	 add("eventLog", "PORT BAD FUNCTION REPORT");
 	 add("source", "Feign CLIENT API");
-	 add("date", "10-03-2021 14:12");
 	}});
-	Fixture.of(EventLog.class).addTemplate("log-valid-without-date", new Rule() {{
-	 add("level", "ERROR");
+	Fixture.of(EventLog.class).addTemplate("log-without-date", new Rule() {{
+	 add("level", EventLog.levelType.ERROR);
 	 add("description", "ERROR 503 GATEWAY");
 	 add("eventLog", "PORT BAD FUNCTION REPORT");
 	 add("source", "Feign CLIENT API");
 	 add("quantity", "2");
+	 add("date", "");
 	}});
  }
 }
