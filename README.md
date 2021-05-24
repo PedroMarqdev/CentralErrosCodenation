@@ -106,9 +106,9 @@ Cadastra um usuário
 Request body: 
 
 ```
-name: 		string
-login: 		string (email válido)
-password: 	string
+name: 		    string
+login: 		    string (email válido)
+password: 	  string
 ```
 
 ## **AUTH TOKEN** Endpoint
@@ -119,9 +119,9 @@ Request body:
 ```
 username,
 password,
-grant_type: 	'password',
-client_id: 		'client_id',
-client_secret: 	'client_secret',
+grant_type: 	    'password',
+client_id: 		    'client_id',
+client_secret: 	  'client_secret',
 ```
 
 ## Tecnologias
