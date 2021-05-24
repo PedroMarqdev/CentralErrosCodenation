@@ -132,6 +132,7 @@ client_secret:  'client_secret',
 - JUnit
 - Spock
 - Maven
+- MySql
 
 ## Grupo
 - Pedro Paulo Marques da Costa -> [Github](https://github.com/PedroMarqdev) | [Linkedin](https://www.linkedin.com/in/pedro-marques-9aaa651b4/)
