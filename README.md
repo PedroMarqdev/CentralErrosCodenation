@@ -79,12 +79,12 @@ Cadastra um log
 Request body:
 
 ```
-date:			String: (dd/MM/aaaa HH:mm)
-description:  	string
-eventLog:		string
-level:			String: (ERROR, WARNING, INFO)
-quantity:		Integer: minimum: 1
-source:			string
+date:           String: (dd/MM/aaaa HH:mm)
+description:    string
+eventLog:       string
+level:          String: (ERROR, WARNING, INFO)
+quantity:       Integer: minimum: 1
+source:         string
 ```
 
 `GET` /loggers/{id}
